@@ -22,18 +22,17 @@ window.onload = function() {
         foregroundMap.loadData(mapModel.get('foreground'));
 
 
-        var playerModel = new PlayerModel();
-        playerModel.save();
-        var player = playerModel.player;
 
         var image = new Surface(96, 128);
         image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
-        player.image = image;
 
-        player.isMoving = false;
-        player.direction = 0;
-        player.walk = 1;
-        player.addEventListener('enterframe', function() {
+        var playerModel = new PlayerModel();
+        playerModel.player.image = image;
+
+        playerModel.player.isMoving = false;
+        playerModel.player.direction = 0;
+        playerModel.player.walk = 1;
+        playerModel.player.addEventListener('enterframe', function() {
             this.frame = this.direction * 3 + this.walk;
             if (this.isMoving) {
                 this.moveBy(this.vx, this.vy);
@@ -46,6 +45,9 @@ window.onload = function() {
                     this.isMoving = false;
                     this.walk = 1;
                 }
+                playerModel.set("x",this.x);
+                playerModel.set("y",this.y);
+            	playerModel.save();
             } else {
                 this.vx = this.vy = 0;
                 if (game.input.left) {
@@ -74,7 +76,7 @@ window.onload = function() {
 
         var stage = new Group();
         stage.addChild(map);
-        stage.addChild(player);
+        stage.addChild(playerModel.player);
         stage.addChild(foregroundMap);
         game.rootScene.addChild(stage);
 
@@ -84,8 +86,8 @@ window.onload = function() {
         game.rootScene.addChild(pad);
 
         game.rootScene.addEventListener('enterframe', function(e) {
-            var x = Math.min((game.width  - 16) / 2 - player.x, 0);
-            var y = Math.min((game.height - 16) / 2 - player.y, 0);
+            var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
+            var y = Math.min((game.height - 16) / 2 - playerModel.player.y, 0);
             x = Math.max(game.width,  x + map.width)  - map.width;
             y = Math.max(game.height, y + map.height) - map.height;
             stage.x = x;
