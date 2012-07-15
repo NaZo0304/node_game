@@ -1,4 +1,5 @@
 {
 	"send": "chat.send",
-	"type": "chat.type"
+	"type": "chat.type",
+	"move": "player.move"
 }
