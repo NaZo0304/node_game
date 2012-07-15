@@ -19,12 +19,21 @@
 // this.urlRoot : URL String
 // =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*vv
 var PlayerModel = Backbone.Model.extend({
-	urlRoot: "php/blog",
+	CHAR_SIZE_X : 32,
+	CHAR_SIZE_Y : 32,
     defaults: {
-    	'X' : 0,
-    	'Y' : 0,
+    	x : 6 * 16 - 8,
+    	y : 10 * 16,
     },
+
+	player  : null,
+
+	urlRoot : "php/blog",
     initialize: function () {
+    	console.log(this.defaults.x, this.defaults.y);
+        this.player = new Sprite(this.CHAR_SIZE_X, this.CHAR_SIZE_Y);
+        this.player.x = this.defaults.x;
+        this.player.y = this.defaults.y;
     },
     validate: function (attrs) {
     },

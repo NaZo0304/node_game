@@ -9,7 +9,7 @@ window.onload = function() {
     game.fps = 15;
     game.preload(images['map'], images['chara']);
     game.onload = function() {
-        var mapModel = new MapModel({id:"1"});
+        var mapModel = new MapModel();
         mapModel.fetch();
         // var mapView = new MapView({el :null, model:mapModel});
 
@@ -22,9 +22,10 @@ window.onload = function() {
         foregroundMap.image = game.assets[images['map']];
         foregroundMap.loadData(mapModel.get('foreground'));
 
-        var player = new Sprite(32, 32);
-        player.x = 6 * 16 - 8;
-        player.y = 10 * 16;
+
+        var playerModel = new PlayerModel();
+        var player = playerModel.player;
+        console.log(playerModel.player);
 
         var image = new Surface(96, 128);
         image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
