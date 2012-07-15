@@ -48,7 +48,7 @@ window.onload = function() {
                 }
                 playerModel.set("x",this.x);
                 playerModel.set("y",this.y);
-            	playerModel.save();
+                playerModel.save();
             } else {
                 this.vx = this.vy = 0;
                 if (game.input.left) {
