@@ -3,7 +3,11 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/css/style.css' />
+    <% if(process.env.NODE_ENV == "development" || !process.env.NODE_ENV){ %>
     <script src="http://localhost:3939/socket.io/socket.io.js"></script>
+    <%}else{%>
+    <script src="http://192.168.1.7:3939/socket.io/socket.io.js"></script>
+    <% } %>
     <script src="/js/vendor/jquery.js"></script>
     <script src="/js/vendor/underscore.js"></script>
     <script src="/js/vendor/backbone.js"></script>
