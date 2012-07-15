@@ -1,4 +1,4 @@
-socket = io.connect('http://localhost:3939');
+socket = location.hostname == 'localhost' ? io.connect('http://localhost:3939') : io.connect('http://192.168.1.7:3939');
 /**
  * Backbone sync using websocket.
  * 
@@ -31,7 +31,6 @@ Backbone.sync = function(method, model, options){
 	case 'create':
 		socket.once(e, function(data){
 			model.id = data.id;
-			console.log('Emit client socket event!');
 			console.log(data);
 		});
 	break;
