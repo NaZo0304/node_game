@@ -6,7 +6,7 @@
  * @author harapeco
  */
 var User = module.exports = {
-	base: 'user/',
+	base: 'rpg/',
 	title: function(){return {title: 'Chat-on'};},
 	index: function(req, res){
 		res.render(User.base + 'index', User.title());		

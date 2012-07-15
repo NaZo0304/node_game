@@ -34,7 +34,7 @@ var SocketRouter = module.exports = {
 	listen: function(app, map, dir){
 		var io = require('socket.io').listen(app);
 		io.sockets.on('connection', function(socket){
-		        SocketRouter.session(socket);
+		        //SocketRouter.session(socket);
 			SocketRouter.map(map, io, socket, dir);
 		});
 	},
