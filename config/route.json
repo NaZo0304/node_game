@@ -1,0 +1,10 @@
+{
+	"get": {
+		"/": "user.index",
+		"/register": "user.register",
+		"/leave": "user.leave",
+		"/friends": "user.friends"
+	},
+	"post": {
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"common": {
+		"encoding": "utf-8",
+		"viewEngine": "ejs",
+		"port": "3939",
+		"session": {
+			"secret": "chat-on"
+		},
+		"webroot": "./client/webroot/"
+	},
+	"server": {
+		"configDir": "./config/",
+		"controllerDir": "./server/controller/",
+		"socketControllerDir": "./server/controller/socket/",
+		"modelDir": "./server/model/",
+		"viewDir": "./server/view/",
+		"socketViewDir": "./server/view/socket/",
+		"libDir": "./server/lib/",
+		"file": {
+			"router": "./config/route.json",
+			"socketRouter": "./config/route.socket.json"
+		},
+		"module": {
+			"util": "./server/lib/util",
+			"router": "./server/lib/router",
+			"socketRouter": "./server/lib/router.socket"
+		}
+	},
+	"client": {
+		"routerDir": "./client/router/",
+		"modelDir": "./client/model/",
+		"viewDir": "./client/view/",
+		"templateDir": "./client/template/"
+	},
+	"db": {
+		"host": "localhost",
+		"port": "",
+		"user": "",
+		"pass": ""
+	}
+}
