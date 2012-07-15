@@ -29,7 +29,6 @@ var PlayerModel = Backbone.Model.extend({
     	ST: 100
     },
 	player  : null,
-	model : this,
 
 	urlRoot : "/player",
     initialize: function () {
