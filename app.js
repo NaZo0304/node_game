@@ -4,7 +4,8 @@ var express = require('express'),
 	path = require('path'),
 	router = require(config.server.module.router),
 	socketRouter = require(config.server.module.socketRouter),
-	util = require(config.server.module.util);
+	util = require(config.server.module.util),
+	sessionStore = new (express.session.MemoryStore)();
 
 var router = require(config.server.module.router);
 
@@ -20,13 +21,20 @@ app.configure(function(){
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	app.use(express.cookieParser());
-	app.use(express.session(config.common.session));
+	app.use(express.session({
+		store: sessionStore,
+		secret: config.common.session.secret,
+		cookie: {httpOnly: false}
+	}));
 	app.use(app.router);
 	app.use(express.static(config.common.webroot));
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+app.configure('staging', function(){
+	(express.errorHandler());
 });
 app.configure('staging', function(){
   app.use(express.errorHandler());
@@ -46,7 +54,12 @@ var routeMap = util.readJSON(config.server.file.router, config.common.encoding);
 router.map(app, routeMap, path.resolve(__dirname, config.server.controllerDir));
 // Websocket routing.
 var socketMap = util.readJSON(config.server.file.socketRouter, config.common.encoding);
-socketRouter.listen(app, socketMap, path.resolve(__dirname, config.server.socketControllerDir));
+socketRouter.listen(
+	app,
+	socketMap, 
+	path.resolve(__dirname, config.server.socketControllerDir),
+	sessionStore
+);
 
 // Http listening.
 app.listen(config.common.port, function(){

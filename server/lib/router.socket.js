@@ -1,15 +1,15 @@
 /**
- * Socket.io URL Router
- * 
- * @package chat-on
- * @subpackage lib
- * @author harapeco
- * @license MIT
- * @respect: https://github.com/myatsumoto/socket.manager
- */
+*Socket.ioURLRouter
+*
+*@packagechat-on
+*@subpackagelib
+*@authorharapeco
+*@licenseMIT
+*@respect:https://github.com/myatsumoto/socket.manager
+*/
 var SocketRouter = module.exports = {
 	set: function(controller, method, io, socket, dir){
-		socket.on(controller+'.'+method, function(data){
+		socket.on(controller + '.' + method,function(data){
 			var callback = SocketRouter.load(controller, method, dir);
 			callback(io, socket, data);
 		});
@@ -28,26 +28,37 @@ var SocketRouter = module.exports = {
 		}
 	},
 	load: function(controller, method, dir){
-		var filepath = dir + '/' + controller;
+		var filepath = dir+'/'+controller;
 		return method ? require(filepath)[method] : require(filepath);
 	},
-	listen: function(app, map, dir){
-		var io = require('socket.io').listen(app);
+	listen: function(app, map, dir, sessionStore){
+		var io=require('socket.io').listen(app);
+		io.configure(function(){
+			io.set('authorization',function(handshakeData, callback){
+				var connect = require('connect'),
+					parseCookie = connect.utils.parseCookie,
+					Session = connect.middleware.session.Session,
+					cookie = handshakeData.headers.cookie;
+				if(cookie){
+					handshakeData.cookie = cookie;
+					handshakeData.sessionId = parseCookie(cookie)['connect.sid'];
+					handshakeData.session = sessionStore;
+					sessionStore.get(handshakeData.sessionId, function(err, session){
+						if(err){
+							callback(err.message, false);
+						}else{
+							handshakeData.session = new Session(handshakeData, session);
+							callback(null, true);
+						}
+					});
+				}else{
+					return callback('Cookie is not found.', false);
+				}
+				callback(null,true);
+			});
+		});
 		io.sockets.on('connection', function(socket){
-		        //SocketRouter.session(socket);
 			SocketRouter.map(map, io, socket, dir);
 		});
-	},
-	session: function(socket){
-		console.log("hoge1");   
-		var cookie = socket.store;
-		console.log(cookie);
-		if(cookie){
-			var parseCookie = require("express").cookieParser;
-			var sid = parseCookie(cookie)['connect.sid'];
-			console.log(sid);
-		}else{
-		  console.log("nothing cookie");
-		}
-        }
+	}
 };
