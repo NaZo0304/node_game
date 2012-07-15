@@ -32,7 +32,7 @@ var User = module.exports = {
 	/**
 	 * 友達一覧API
 	 */
-	friends: function(){
-		
+	friends: function(req, res){
+		res.render(User.base + 'friends', User.title());
 	}
 };
