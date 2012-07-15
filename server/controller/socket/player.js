@@ -12,24 +12,30 @@ var Player = module.exports = {
 	         	 var Player = require(' ../../../' + config.server.modelDir + 'player.js');
 			 return Player;
 		},
-	//Login
-	login:  function(io, socket, message) {
-		  //sessionにSETする
-	},
-
 	//移動
 	create: function(io, socket, data) {
-		p = new Player.model()
+		  console.log("create")
+		var klass = new Player.model;
+		var p = new klass();  
+		console.log(p);
 		p.x = data.x;
 		p.y = data.y;
 		p.hp = data.hp;
 		p.mp = data.mp;
 		p.save();
-		//xとyを保存する
+		console.log(p);
+		socket.emit(data.clientEvent, data);
 	},
-	//login check
-	update: function(){
+	update: function(io,socket,data){
+		  console.log("update")
 	  //current_userを返却＆checkする
-	}
+		socket.emit(data.clientEvent, data);
+	},
+	read: function(io, socket, data){
+		 socket.emit(data.clientEvent, data);
+	 },
+	destroy: function(io, socket, data){
+		 socket.emit(data.clientEvent, data);
+	 }
 }
 
