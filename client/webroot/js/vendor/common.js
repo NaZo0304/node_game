@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:3939');
+var socket = location.hostname == 'localhost' ? io.connect('http://localhost:3939') : io.connect('http://192.168.1.17:3939');
 var timer;
 $(document).ready(function(){
 	$('#message').keydown(function(event){
