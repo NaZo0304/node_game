@@ -24,11 +24,13 @@ var PlayerModel = Backbone.Model.extend({
     defaults: {
     	x : 6 * 16 - 8,
     	y : 10 * 16,
+    	HP: 100,
+    	MP: 100,
+    	ST: 100
     },
-
 	player  : null,
 
-	urlRoot : "php/blog",
+	urlRoot : "/player",
     initialize: function () {
     	console.log(this.defaults.x, this.defaults.y);
         this.player = new Sprite(this.CHAR_SIZE_X, this.CHAR_SIZE_Y);
@@ -48,7 +50,7 @@ var PlayerModel = Backbone.Model.extend({
 
 
 //VIEWは、HTMLに対してJQuery で描画やイベントの登録などを行う。
-var MapView = Backbone.View.extend({
+var PlayerView = Backbone.View.extend({
   initialize: function () {
   	_.bindAll(this, "render");
   	this.model.bind("change", this.render);

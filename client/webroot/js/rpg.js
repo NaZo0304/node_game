@@ -10,7 +10,6 @@ window.onload = function() {
     game.preload(images['map'], images['chara']);
     game.onload = function() {
         var mapModel = new MapModel();
-        mapModel.fetch();
         // var mapView = new MapView({el :null, model:mapModel});
 
         var map = new Map(16, 16);
@@ -24,8 +23,8 @@ window.onload = function() {
 
 
         var playerModel = new PlayerModel();
+        playerModel.save();
         var player = playerModel.player;
-        console.log(playerModel.player);
 
         var image = new Surface(96, 128);
         image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
