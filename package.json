@@ -5,6 +5,7 @@
   , "dependencies": {
       "express": "2.5.11"
     , "ejs": ">= 0.0.1"
+    , "connect-redis": "*"
     , "mongoose": "*"
   }
 }

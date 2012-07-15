@@ -10,6 +10,8 @@ var router = require(config.server.module.router);
 
 // Server configuration
 var app = module.exports = express.createServer();
+// create RedisStore
+var RedisStore = require('connect-redis')(express);
 
 console.dir(config.server.viewDir);
 app.configure(function(){
@@ -17,7 +19,7 @@ app.configure(function(){
 	app.set('view engine', config.common.viewEngine);
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
-	app.use(express.cookieParser());
+	app.use(express.cookieParser(config.common.cookie.secret, config.common.cookie.name));
 	app.use(express.session(config.common.session));
 	app.use(app.router);
 	app.use(express.static(config.common.webroot));

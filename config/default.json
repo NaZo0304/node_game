@@ -4,7 +4,11 @@
 		"viewEngine": "ejs",
 		"port": "3939",
 		"session": {
-			"secret": "chat-on"
+			"secret": "node_game"
+		},
+                "cookie" : {
+			"secret" : "secret",
+			"name" : "node_game"
 		},
 		"webroot": "./client/webroot/"
 	},

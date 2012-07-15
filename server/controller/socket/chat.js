@@ -10,7 +10,6 @@ var Chat = module.exports = {
 	 * ルーム作成
 	 */
 	open: function(io, socket, message){
-		
 	},
 	/**
 	 * ルーム入室
@@ -39,9 +38,7 @@ var Chat = module.exports = {
 	 * ルーム退室
 	 */
 	leave: function(io, socket, message){
-		
 	},
 	close: function(io, socket, message){
-		
 	}
 }
