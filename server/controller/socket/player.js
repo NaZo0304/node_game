@@ -17,11 +17,11 @@ var Player = module.exports = {
 		  console.log("create")
 		var klass = new Player.model;
 		var p = new klass();  
-		console.log(p);
 		p.x = data.x;
 		p.y = data.y;
 		p.hp = data.hp;
 		p.mp = data.mp;
+		console.log(p);
 		p.save();
 		console.log(p);
 		socket.emit(data.clientEvent, data);
