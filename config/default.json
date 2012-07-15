@@ -32,10 +32,21 @@
 		"viewDir": "./client/view/",
 		"templateDir": "./client/template/"
 	},
+
 	"db": {
-		"host": "localhost",
-		"port": "",
-		"user": "",
-		"pass": ""
+		"development" :{
+			"host": "mongodb://localhost/",
+        		"name": "node_game",
+			"port": "",
+			"user": "",
+			"pass": ""
+                },
+		"production" :{
+			"host": "localhost",
+        		"name": "node_game",
+			"port": "",
+			"user": "",
+			"pass": ""
+               }
 	}
 }

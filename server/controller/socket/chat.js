@@ -16,12 +16,17 @@ var Chat = module.exports = {
 	 * ルーム入室
 	 */
 	join: function(io, socket, message){
-		
 	},
 	/**
 	 * メッセージ送信
 	 */
 	send: function(io, socket, message){
+		//TODO: ohta あとでなんとかする
+                var config = require('config')
+		var Player = require(' ../../../' + config.server.modelDir + 'player.js');
+		var p = new Player();
+		p.name = text;
+		p.save();
 		io.sockets.emit('receive', message);
 	},
 	/**

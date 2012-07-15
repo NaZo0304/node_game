@@ -37,12 +37,15 @@ app.dynamicHelpers({
 	}
 });
 
+var Player = require("./server/model/player.js");
+
 // URL routing.
 var routeMap = util.readJSON(config.server.file.router, config.common.encoding);
 router.map(app, routeMap, path.resolve(__dirname, config.server.controllerDir));
 // Websocket routing.
 var socketMap = util.readJSON(config.server.file.socketRouter, config.common.encoding);
 socketRouter.listen(app, socketMap, path.resolve(__dirname, config.server.socketControllerDir));
+
 
 // Http listening.
 app.listen(config.common.port, function(){
