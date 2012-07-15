@@ -1,6 +1,7 @@
 enchant();
 
 window.onload = function() {
+	var playerMap = [];
 	var images = {
 	              map   : 'images/map1.gif',
 	              chara : 'images/chara0.gif'
@@ -74,9 +75,17 @@ window.onload = function() {
             }
         });
 
+        var otherModel = new PlayerModel();
+        var image = new Surface(96, 128);
+        image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
+        otherModel.player.image = image;
+
+        playerMap.push(otherModel);
+
         var stage = new Group();
         stage.addChild(map);
         stage.addChild(playerModel.player);
+        stage.addChild(otherModel.player);
         stage.addChild(foregroundMap);
         game.rootScene.addChild(stage);
 
