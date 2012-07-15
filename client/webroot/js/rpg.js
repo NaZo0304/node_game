@@ -1,4 +1,23 @@
 enchant();
+/**
+ * @scope   CenterLabel.prototype
+ */
+var CenterLabel = Class.create(Label, {
+    /**
+     * 中央表示ラベル
+     */
+    initialize : function(color){
+        // 親のコンストラクタを呼ぶ
+        Label.call(this);
+
+        // 中央表示にする
+        this.width = 200;
+        this._element.style.textAlign = "center";
+        // 色を設定
+        color = color || "white";
+        this.color = color;
+    }
+});
 
 window.onload = function() {
 	var playerMap = [];
@@ -27,7 +46,7 @@ window.onload = function() {
         var image = new Surface(96, 128);
         image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
 
-        var playerModel = new PlayerModel();
+        var playerModel = new PlayerModel({ name: "player" });
         playerModel.player.image = image;
 
         playerModel.player.isMoving = false;
@@ -79,7 +98,6 @@ window.onload = function() {
         var image = new Surface(96, 128);
         image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
         otherModel.player.image = image;
-
         playerMap.push(otherModel);
 
         var stage = new Group();
@@ -93,6 +111,7 @@ window.onload = function() {
         pad.x = 0;
         pad.y = 220;
         game.rootScene.addChild(pad);
+        game.rootScene.addChild(playerModel.nameLabel);
 
         game.rootScene.addEventListener('enterframe', function(e) {
             var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);

@@ -29,11 +29,19 @@ var PlayerModel = Backbone.Model.extend({
     	ST: 100
     },
 	player  : null,
-        url : "player",
+	nameLabel    : null,
+    url : "player",
     initialize: function () {
         this.player = new Sprite(this.CHAR_SIZE_X, this.CHAR_SIZE_Y);
         this.player.x = this.defaults.x;
         this.player.y = this.defaults.y;
+
+        this.nameLabel = new CenterLabel();
+        this.nameLabel.x = this.player.x / 2 - 50;
+        this.nameLabel.y = this.player.y - 10;
+        this.nameLabel.addEventListener(enchant.Event.ENTER_FRAME, function(){
+            this.text = "testertqeqw";
+        });
     },
     validate: function (attrs) {
     },
