@@ -25,7 +25,7 @@ var Chat = module.exports = {
                 var config = require('config')
 		var Player = require(' ../../../' + config.server.modelDir + 'player.js');
 		var p = new Player();
-		p.name = text;
+		p.name = message.text;
 		p.save();
 		io.sockets.emit('receive', message);
 	},
