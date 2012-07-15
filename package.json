@@ -5,7 +5,9 @@
   , "dependencies": {
       "express": "2.5.11"
     , "ejs": ">= 0.0.1"
+    , "cookie": "*"
     , "connect-redis": "*"
+    , "connect": "2.3.0"
     , "mongoose": "*"
   }
 }
