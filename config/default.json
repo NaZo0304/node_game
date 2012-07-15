@@ -4,7 +4,8 @@
 		"viewEngine": "ejs",
 		"port": "3939",
 		"session": {
-			"secret": "node_game"
+			"secret": "node_game",
+			"cookie": { "httpOnly" : false }
 		},
                 "cookie" : {
 			"secret" : "secret",

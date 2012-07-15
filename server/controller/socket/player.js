@@ -7,6 +7,7 @@
  */
 var Player = module.exports = {
         model: function(){
+			//TODO: ohta あとでなんとかする
                          var config = require('config')
 	         	 var Player = require(' ../../../' + config.server.modelDir + 'player.js');
 			 return Player;
@@ -18,7 +19,6 @@ var Player = module.exports = {
 
 	//移動
 	move: function(io, socket, data) {
-		//TODO: ohta あとでなんとかする
 		p = new Player.model()
 		p.x = data.x;
 		p.y = data.y;

@@ -27,7 +27,20 @@ var SocketRouter = module.exports = {
 	listen: function(app, map, dir){
 		var io = require('socket.io').listen(app);
 		io.sockets.on('connection', function(socket){
+		        SocketRouter.session(socket);
 			SocketRouter.map(map, io, socket, dir);
 		});
-	}
+	},
+	session: function(socket){
+		console.log("hoge1");   
+		var cookie = socket.store;
+		console.log(cookie);
+		if(cookie){
+			var parseCookie = require("express").cookieParser;
+			var sid = parseCookie(cookie)['connect.sid'];
+			console.log(sid);
+		}else{
+		  console.log("nothing cookie");
+		}
+        }
 };
