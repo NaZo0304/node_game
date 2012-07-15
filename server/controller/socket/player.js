@@ -9,14 +9,12 @@ var Player = module.exports = {
         model: function(){
 			//TODO: ohta あとでなんとかする
                          var config = require('config')
-	         	 var Player = require(' ../../../' + config.server.modelDir + 'player.js');
-			 return Player;
+	         	 return require(' ../../../' + config.server.modelDir + 'player.js');
 		},
 	//移動
 	create: function(io, socket, data) {
-		  console.log("create")
-		var klass = new Player.model;
-		var p = new klass();  
+		var klass = Player.model();  
+		var p = new klass();
 		p.x = data['item'].x;
 		p.y = data['item'].y;
 		p.HP = data['item'].HP;
@@ -25,12 +23,19 @@ var Player = module.exports = {
 		p.c_id = p._id
 		p.id = p._id
 		console.log(p);
-		socket.emit(data.clientEvent, data.item);
+		socket.emit(data.clientEvent, p);
 	},
 	update: function(io,socket,data){
-		  console.log("update")
-	  //current_userを返却＆checkする
-		socket.emit(data.clientEvent, data);
+                var config = require('config')
+	        var model =  require(' ../../../' + config.server.modelDir + 'player.js');
+		var p = model.findById("5002d4279776ec2115000004");
+		p.x = data['item'].x;
+		p.y = data['item'].y;
+		p.HP = data['item'].HP;
+		p.MP = data['item'].MP;
+		p.save();
+	 	//current_userを返却＆checkする
+		socket.emit(data.clientEvent, p);
 	},
 	read: function(io, socket, data){
 		 socket.emit(data.clientEvent, data);

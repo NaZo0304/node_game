@@ -24,7 +24,8 @@ Backbone.sync = function(method, model, options){
 	var e = onEvent(method, signature(model));
 	var data = {
 		clientEvent: e,
-		item: model.attributes
+		item: model.attributes,
+		id: model.id  
 	};
 	socket.emit(emitEvent(model, method), data);
 	switch(method){
