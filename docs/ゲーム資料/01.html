@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>  <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>  <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>Getting Started with deck.js</title>
+	
+	<meta name="description" content="A jQuery library for modern HTML presentations">
+	<meta name="author" content="Caleb Troughton">
+	<meta name="viewport" content="width=1024, user-scalable=no">
+	
+	<!-- Core and extension CSS files -->
+	<link rel="stylesheet" href="./core/deck.core.css">
+	<link rel="stylesheet" href="./extensions/goto/deck.goto.css">
+	<link rel="stylesheet" href="./extensions/menu/deck.menu.css">
+	<link rel="stylesheet" href="./extensions/navigation/deck.navigation.css">
+	<link rel="stylesheet" href="./extensions/status/deck.status.css">
+	<link rel="stylesheet" href="./extensions/hash/deck.hash.css">
+	<link rel="stylesheet" href="./extensions/scale/deck.scale.css">
+	
+	<link rel="stylesheet" href="./themes/style/web-2.0.css">
+	<link rel="stylesheet" href="./themes/transition/horizontal-slide.css">
+	
+	<script src="./modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+
+<!-- Begin slides -->
+<section class="slide" id="title-slide">
+	<h1>Nodeで何か作ろう会　ゲーム編</h1>
+</section>
+
+<section class="slide" id="title-slide">
+	<h2>ゲームハッカソンの流れ</h2>
+	<ol>
+		<li>
+			<h3>下準備</h3>
+			<p>7月14日まで</p>
+		</li>
+		<li>
+			<h3>ハッカソン前に担当決め</h3>
+			<p>7月14日まで</p>
+		</li>
+		<li>
+			<h3>各担当のプログラミング！！</h3>
+			<p>7月15日～7月16日</p>
+		</li>
+		<li>
+			<h3>遊び倒す（α版）</h3>
+			<p>7月16日</p>
+		</li>
+	</ol>
+</section>
+
+<section class="slide" id="how-to-overview">
+	<h2>下準備だ！</h2>
+	<ol>
+		<li>
+			<h3>アーキテクト検討</h3>
+			<p>フロント～バックエンドまでのミドルウエアの検討</p>
+			<p>担当は、福田さん</p>
+		</li>
+		<li>
+			<h3>環境の用意</h3>
+			<p>代々木事務所にCentOS6.2が用意されているが、不足分の環境を構築する。</p>
+			<p>担当は、福田さん</p>
+		</li>
+		<li>
+			<h3>ゲーム仕様のまとめ</h3>
+			<p>本資料に記載</p>
+			<p>担当は、川上様</p>
+		</li>
+		<li>
+			<h3>処理概要の一覧表</h3>
+			<p>本資料に記載</p>
+			<p>担当は、川上様</p>
+		</li>
+		<li>
+			<h3>I/F設計</h3>
+			<p>本資料に記載</p>
+			<p>担当は、川上様</p>
+		</li>
+		<li>
+			<h3>サンプル実装(enchant.js + backbone.js + socket.io + node.js</h3>
+			<p>githubへコミットします。内容は本資料に記載。</p>
+			<p>担当は、川上様</p>
+		</li>
+	</ol>
+</section>
+
+<section class="slide" id="game">
+	<h2>ゲーム仕様のまとめ</h2>
+	<ol>
+		<li>
+			<h3>移動について</h3>
+			<p>WSAD 移動 及び 上下左右の矢印キーでの移動で制御を行う。移動はpixcel単位での移動とする。</p>
+		</li>
+		<li>
+			<h3>MAPTIPについて</h3>
+			<p>移動可能なTIP・不可なTIP・視界が遮断されるTIP・されないTIPを内部情報を持つ。</p>
+			<p>見た目はありきたりな形で制御！</p>
+		</li>
+		<li>
+			<h3>スキルについて</h3>
+			<p>攻撃型スキル：スキル詠唱（動けない）　と　MPが必要MP以上あるか計算　と　発動前消費ＭＰ計算＞　対象の相手をターゲット　＞　距離判定・視界が遮断されてないか判定　＞　スキル発動　＞　EBなら時間差でダメージ計算　・　FSなら即時ダメージ計算　と　MP消費計算</p>
+			<p>回復型スキル：スキル詠唱（動けない）　と　MPが必要MP以上あるか計算　と　発動前消費ＭＰ計算　＞　対象の相手をターゲット　＞　距離判定・視界が遮断されてないか判定　＞　スキル発動　＞　回復計算　と　MP消費計算</p>
+			<p>TIP選択型スキル：スキル詠唱　と　MPが必要MP以上あるか計算　＞　対象のTIPをターゲット　＞　距離判定・視界が遮断されてないか判定　＞　スキル発動　＞　対象TIPに状態を適用　と　MP消費計算</p>
+		</li>
+		<li>
+			<h3>スキル Energy Boltについて</h3>
+			<p>攻撃型スキル</p>
+			<p>MP消費：５＞１０</p>
+			<p>ダメージ：３０</p>
+			<p>詠唱時間：１秒</p>
+		</li>
+		<li>
+			<h3>スキル Flame Strikeについて</h3>
+			<p>攻撃型スキル</p>
+			<p>MP消費：１０＞２０</p>
+			<p>ダメージ：７０</p>
+			<p>詠唱時間：３秒</p>
+		</li>
+		<li>
+			<h3>スキル Wall of Stoneについて</h3>
+			<p>TIP選択型スキル</p>
+			<p>MP消費：１＞４</p>
+			<p>ダメージ：－</p>
+			<p>TIP範囲：対象より上下左右２マス（上下or左右）</p>
+			<p>詠唱時間：３秒</p>
+		</li>
+		<li>
+			<h3>スキル Healについて</h3>
+			<p>回復型スキル</p>
+			<p>MP消費：１＞４</p>
+			<p>回復：１０</p>
+			<p>詠唱時間：0.5秒</p>
+		</li>
+		<li>
+			<h3>スキル Greater Healについて</h3>
+			<p>回復型スキル</p>
+			<p>MP消費：５＞１０</p>
+			<p>回復：５０</p>
+			<p>詠唱時間：１．５秒</p>
+		</li>
+		<li>
+			<h3>処理概要について</h3>
+			<p>【フロント】入室画面</p>
+			<p>【フロント】MAP描画処理</p>
+			<p>【フロント】キャラクタ描画処理</p>
+			<p>【フロント】HP/MP描画処理</p>
+			<p>【フロント】スキル使用（キーバインド：１～５）</p>
+			<p>【フロント】移動（キーバインド：WSAS・↑↓←→）</p>
+			<p>【バックエンド】入室処理</p>
+			<p>【バックエンド】退室処理</p>
+			<p>【バックエンド】移動処理</p>
+			<p>【バックエンド】スキル使用処理</p>
+			<p>【バックエンド】スキル発動処理</p>
+		</li>
+		<li>
+			<h3>I/Fについて</h3>
+			<p>・JOIN API</p>
+			<p>・自キャラクター位置情報 API</p>
+			<p>・全キャラクター位置情報 API</p>
+			<p>・MAP TIP情報 API</p>
+			<p>・スキル使用 API</p>
+			<p>・スキル発動 API</p>
+		</li>
+	</ol>
+</section>
+<section class="slide" id="detail_f_1">
+	<h2>詳細（フロント①）</h2>
+	<h3>MAPについて</h3>
+	<ol>
+		<li>
+			<h3>縦・横幅</h3>
+			<p>32 x 32 の正方形</p>
+			<p>enchant.js の exsample/rpg MAP画像を流用</p>
+		</li>
+		<li>
+			<h3>移動判定について</h3>
+			<p>MAP DATAと一緒にcollisionの配列で移動可かどうかを管理し、移動判定に利用する。</p>
+			<p> 0 = 移動可能 / -1 以下 移動不可能 + 地形の状態管理 / 1 以上 移動可能 + 地形の状態管理</p>
+		</li>
+	</ol>
+	<p>例</p>
+	<p>
+      map.maptipdata  = [322,322,322,322,322,322,224,225,225,225,225,225,167,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205],
+      map.collisionData = [ 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1],
+    </p>      
+</section>
+<section class="slide" id="detail_f_2">
+	<h2>詳細（フロント②）</h2>
+	<h3>自キャラクター・他キャラクターについて</h3>
+	<ol>
+		<li>
+			<h3>縦・横幅</h3>
+			<p>xx x xx の長方形</p>
+			<p>enchant.js の exsample/rpg char画像を流用(３人分）</p>
+			<p>色分けして自分と他人と区別したらいいかな？まずはｗ</p>
+		</li>
+		<li>
+			<h3>移動について</h3>
+			<p>WSAD or ↑↓←→で移動</p>
+			<p>pixel単位で移動して移動可能判定を常に処理しながら移動する。</p>
+			<p>スキル詠唱中は、移動不可能</p>
+			<p>スキル詠唱後、ターゲッティングする状態以降、移動可能</p>
+			<p>ようは、詠唱中以外移動可能</p>
+		</li>
+		<li>
+			<h3>HP/MP/SM/EXP(kill count)について</h3>
+			<p>HPが0以下になったらdead。自動回復しない。MAX HP = 100</p>
+			<p>MPは、スキル使用で消費。自動回復。MAX MP = 100</p>
+			<p>【実装未定】SMは走る行為で消費。自動回復。MAX SM = 100。</p>
+			<p>【実装未定】EXP(KillCount)は、倒した人にPointが+1される。死ぬと-1。EXPが増えても何もない。ただの自己満足。</p>
+		</li>
+	</ol>
+</section>
+<section class="slide" id="detail_f_3">
+	<h2>詳細（フロント③）</h2>
+	<p>スキルの発動～ダメージ・回復・地形反映までの流れについて</p>
+	<ol>
+		<li>
+			<h3>スキルの種類</h3>
+		</li>
+		<li>
+			<h3>スキル使用の流れ</h3>
+		</li>
+		<li>
+			<h3>発動条件</h3>
+		</li>
+		<li>
+			<h3>ダメージ・回復・地形反映</h3>
+		</li>
+	</ol>
+</section>
+
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+	<span class="deck-status-current"></span>
+	/
+	<span class="deck-status-total"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+	<label for="goto-slide">Go to slide:</label>
+	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+	<datalist id="goto-datalist"></datalist>
+	<input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+
+<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="./jquery-1.7.min.js"><\/script>')</script>
+
+<!-- Deck Core and extensions -->
+<script src="./core/deck.core.js"></script>
+<script src="./extensions/hash/deck.hash.js"></script>
+<script src="./extensions/menu/deck.menu.js"></script>
+<script src="./extensions/goto/deck.goto.js"></script>
+<script src="./extensions/status/deck.status.js"></script>
+<script src="./extensions/navigation/deck.navigation.js"></script>
+<script src="./extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck -->
+<script>
+$(function() {
+	$.deck('.slide');
+});
+</script>
+
+</body>
+</html>
