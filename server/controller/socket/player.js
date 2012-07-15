@@ -18,7 +18,7 @@ var Player = module.exports = {
 	},
 
 	//移動
-	move: function(io, socket, data) {
+	create: function(io, socket, data) {
 		p = new Player.model()
 		p.x = data.x;
 		p.y = data.y;
@@ -28,7 +28,7 @@ var Player = module.exports = {
 		//xとyを保存する
 	},
 	//login check
-	loginRequired: function(){
+	update: function(){
 	  //current_userを返却＆checkする
 	}
 }
