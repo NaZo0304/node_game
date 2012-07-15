@@ -1,14 +1,25 @@
-socket = location.hostname == 'localhost' ? io.connect('http://localhost:3939') : io.connect('http://192.168.1.7:3939');
 /**
- * Backbone sync using websocket.
+ * Backbone using websocket.
  * 
  * @package node_game
  * @author harapeco
  * @respect http://developer.teradata.com/blog/jasonstrimpel/2011/11/backbone-js-and-socket-io
  * @license MIT
  */
+socket = location.hostname == 'localhost' ? io.connect('http://localhost:3939') : io.connect('http://192.168.1.7:3939');
+Backbone.connectSocket = function(room, name){
+	if(!name) name = _.uniqueId('player_');
+	socket.on('backbone.socket.connected', function(){
+		socket.json.emit('init', {
+			'room': room,
+			'name': name
+		});
+	});
+	socket.on('backbone.socket.message', function(data){
+		console.log('message is', data);
+	});
+}
 Backbone.sync = function(method, model, options){
-	
 	var emitEvent = function(model, method){return model.url + '.' + method;}
 	var signature = function(model){
 		var ret = {};
