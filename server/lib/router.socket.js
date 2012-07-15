@@ -59,6 +59,10 @@ var SocketRouter = module.exports = {
 		});
 		io.sockets.on('connection', function(socket){
 			SocketRouter.map(map, io, socket, dir);
+			//TODO: disconnect
+                        socket.on("disconnect", function () {
+                           io.sockets.emit("hoge", {});
+                         });
 		});
 	}
 };
