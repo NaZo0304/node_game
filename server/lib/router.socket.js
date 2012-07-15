@@ -8,21 +8,28 @@
  * @respect: https://github.com/myatsumoto/socket.manager
  */
 var SocketRouter = module.exports = {
-	set: function(event, map, io, socket, dir){
-		socket.on(event, function(message){
-			var v = map.split('.');
-			var callback = SocketRouter.load(v[0], v[1], dir);
-			callback(io, socket, message);
+	set: function(controller, method, io, socket, dir){
+		socket.on(controller+'.'+method, function(data){
+			var callback = SocketRouter.load(controller, method, dir);
+			callback(io, socket, data);
 		});
 	},
 	map: function(map, io, socket, dir){
-		for(var event in map){
-			SocketRouter.set(event, map[event], io, socket, dir);
+		for(var controller in map){
+			var method = map[controller];
+			if(method === 'crud'){
+				SocketRouter.set(controller, 'create', io, socket, dir);
+				SocketRouter.set(controller, 'read', io, socket, dir);
+				SocketRouter.set(controller, 'update', io, socket, dir);
+				SocketRouter.set(controller, 'destroy', io, socket, dir);
+			}else{
+				SocketRouter.set(controller, method, io, socket, dir);
+			}
 		}
 	},
-	load: function(path, func, dir){
-		var uri = dir + '/' + path;
-		return func ? require(uri)[func] : require(uri);
+	load: function(controller, method, dir){
+		var filepath = dir + '/' + controller;
+		return method ? require(filepath)[method] : require(filepath);
 	},
 	listen: function(app, map, dir){
 		var io = require('socket.io').listen(app);
