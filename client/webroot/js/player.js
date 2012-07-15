@@ -30,8 +30,7 @@ var PlayerModel = Backbone.Model.extend({
     },
 	player  : null,
 	nameLabel    : null,
-
-	urlRoot : "/player",
+    url : "player",
     initialize: function () {
         this.player = new Sprite(this.CHAR_SIZE_X, this.CHAR_SIZE_Y);
         this.player.x = this.defaults.x;
