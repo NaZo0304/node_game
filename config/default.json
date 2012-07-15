@@ -46,7 +46,7 @@
 			"pass": ""
                 },
 		"production" :{
-			"host": "localhost",
+			"host": "mongodb://localhost/",
         		"name": "node_game",
 			"port": "",
 			"user": "",

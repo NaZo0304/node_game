@@ -6,6 +6,11 @@
  * @author harapeco
  */
 var Chat = module.exports = {
+        model: function(){
+                         var config = require('config')
+	         	 var Player = require(' ../../../' + config.server.modelDir + 'player.js');
+			 return Player;
+		}
 	/**
 	 * ルーム作成
 	 */
@@ -20,10 +25,7 @@ var Chat = module.exports = {
 	 * メッセージ送信
 	 */
 	send: function(io, socket, message){
-		//TODO: ohta あとでなんとかする
-                var config = require('config')
-		var Player = require(' ../../../' + config.server.modelDir + 'player.js');
-		var p = new Player();
+		var p = new Player.model();
 		p.name = message.text;
 		p.save();
 		io.sockets.emit('receive', message);
