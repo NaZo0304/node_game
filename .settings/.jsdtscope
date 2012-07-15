@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="docs/ゲーム資料/extensions/status/|client/webroot/js/|sample/skill/|docs/ゲーム資料/|client/model/|docs/ゲーム資料/extensions/navigation/|docs/ゲーム資料/extensions/menu/|client/view/|docs/ゲーム資料/extensions/scale/|server/controller/|docs/ゲーム資料/core/|sample/rpg/|docs/ゲーム資料/extensions/hash/|server/controller/socket/|sample/socket.io/|server/lib/|sample/move/|docs/ゲーム資料/extensions/goto/|client/webroot/" kind="src" path=""/>
+	<classpathentry kind="src" path="client/model"/>
+	<classpathentry kind="src" path="client/view"/>
+	<classpathentry excluding="js/" kind="src" path="client/webroot"/>
+	<classpathentry kind="src" path="client/webroot/js"/>
+	<classpathentry excluding="extensions/status/|extensions/navigation/|extensions/menu/|extensions/scale/|core/|extensions/hash/|extensions/goto/" kind="src" path="docs/ゲーム資料"/>
+	<classpathentry kind="src" path="docs/ゲーム資料/core"/>
+	<classpathentry kind="src" path="docs/ゲーム資料/extensions/goto"/>
+	<classpathentry kind="src" path="docs/ゲーム資料/extensions/hash"/>
+	<classpathentry kind="src" path="docs/ゲーム資料/extensions/menu"/>
+	<classpathentry kind="src" path="docs/ゲーム資料/extensions/navigation"/>
+	<classpathentry kind="src" path="docs/ゲーム資料/extensions/scale"/>
+	<classpathentry kind="src" path="docs/ゲーム資料/extensions/status"/>
+	<classpathentry kind="src" path="sample/move"/>
+	<classpathentry kind="src" path="sample/rpg"/>
+	<classpathentry kind="src" path="sample/skill"/>
+	<classpathentry kind="src" path="sample/socket.io"/>
+	<classpathentry excluding="socket/" kind="src" path="server/controller"/>
+	<classpathentry kind="src" path="server/controller/socket"/>
+	<classpathentry kind="src" path="server/lib"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
