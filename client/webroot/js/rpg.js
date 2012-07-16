@@ -116,6 +116,7 @@ window.onload = function() {
             stage.x = x;
             stage.y = y;
         });
+
         socket.on('player.create', function(msg) {
         	console.log('player.created : ');
         	console.log(msg);
@@ -145,6 +146,9 @@ window.onload = function() {
           playerModel = new PlayerModel({ name: msg });
           if (msg.length > 0) {
              playerModel.save();
+	     console.log(playerModel.id);
+	     console.log(playerModel.id);
+	     console.log(playerModel.id);
              game.rootScene.removeChild(input);
           }else{
 	     alert('名前を入れてね');
