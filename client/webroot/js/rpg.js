@@ -130,10 +130,10 @@ window.onload = function() {
         	}
 
         	console.log(player);
-            socket.on('player.update', function(msg) {
-            	console.log('player/' + msg.id + '.update :');
-            	console.log(msg);
-            });
+        });
+        socket.on('player.update', function(msg) {
+        	console.log('player/' + msg.id + '.update :');
+        	console.log(msg);
         });
         socket.on('disconnect',    function(msg) {
         	console.log('disconnect : ');
