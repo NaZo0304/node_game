@@ -3,7 +3,8 @@
 		"/": "rpg.index",
 		"/register": "user.register",
 		"/leave": "user.leave",
-		"/friends": "user.friends"
+		"/friends": "user.friends",
+		"/login": "session.index"
 	},
 	"post": {
 	}
