@@ -1,4 +1,13 @@
-
+/*
+        c_id  : ObjectId,
+        id  : ObjectId,
+        name : String,
+        x : Number,
+        y : Number,
+        HP : Number,
+        MP : Number,
+        ST : Number
+        */
 // =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*vv
 // Backbone.js Model郡
 // @see http://qiita.com/items/5acef8dd49f67fd7813c
@@ -22,6 +31,8 @@ var PlayerModel = Backbone.Model.extend({
 	CHAR_SIZE_X : 32,
 	CHAR_SIZE_Y : 32,
     defaults: {
+    	id : null,
+    	name : "名無し",
     	x : 6 * 16 - 8,
     	y : 10 * 16,
     	HP: 100,
@@ -40,7 +51,13 @@ var PlayerModel = Backbone.Model.extend({
         this.nameLabel.x = this.player.x / 2 - 50;
         this.nameLabel.y = this.player.y - 10;
         this.nameLabel.addEventListener(enchant.Event.ENTER_FRAME, function(){
-            this.text = "testertqeqw";
+            this.text = "";
+        });
+        this.save();
+
+        socket.on('player/' + this.get("id") + '.update', function(msg) {
+        	console.log('player/' + this.get("id") + '.update :');
+        	console.log(msg);
         });
     },
     validate: function (attrs) {

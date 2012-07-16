@@ -92,24 +92,13 @@ window.onload = function() {
             }
         });
 
-        var otherModel = new PlayerModel();
-        var image = new Surface(96, 128);
-        image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
-        otherModel.player.image = image;
-        playerMap.push(otherModel);
-
         var stage = new Group();
         stage.addChild(map);
-        stage.addChild(playerModel.player);
-        stage.addChild(otherModel.player);
-        stage.addChild(foregroundMap);
         game.rootScene.addChild(stage);
-
-        var pad = new Pad();
-        pad.x = 0;
-        pad.y = 220;
-        game.rootScene.addChild(pad);
-        game.rootScene.addChild(playerModel.nameLabel);
+        var stagePl = new Group();
+        stagePl.addChild(playerModel.player);
+        stage.addChild(stagePl);
+        stage.addChild(foregroundMap);
 
         game.rootScene.addEventListener('enterframe', function(e) {
             var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
@@ -118,6 +107,21 @@ window.onload = function() {
             y = Math.max(game.height, y + map.height) - map.height;
             stage.x = x;
             stage.y = y;
+        });
+        socket.on('player.create', function(msg) {
+        	console.log('player.created : ');
+        	console.log(msg);
+            var otherModel = new PlayerModel(msg);
+            var image = new Surface(96, 128);
+            image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
+            otherModel.player.image = image;
+
+            playerMap.push(otherModel);
+            stagePl.addChild(otherModel.player);
+        });
+        socket.on('disconnect',    function(msg) {
+        	console.log('disconnect : ');
+        	console.log(msg);
         });
     };
     game.start();
