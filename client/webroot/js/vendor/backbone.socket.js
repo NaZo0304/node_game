@@ -46,6 +46,7 @@ Backbone.sync = function(method, model, options){
 			console.log(data);
 		});
 	break;
+
 	case 'read':
 		socket.once(e, function(data){options.success(data);});
 	break;
