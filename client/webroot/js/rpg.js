@@ -43,7 +43,7 @@ window.onload = function() {
 
         var image = new Surface(96, 128);
         image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
-/*
+
         var playerModel = new PlayerModel({ name: "player" });
         playerModel.player.image = image;
 
@@ -90,7 +90,7 @@ window.onload = function() {
                     }
                 }
             }
-        });*/
+        });
 
         var otherModel = new PlayerModel();
         var image = new Surface(96, 128);
@@ -100,7 +100,7 @@ window.onload = function() {
 
         var stage = new Group();
         stage.addChild(map);
-//        stage.addChild(playerModel.player);
+        stage.addChild(playerModel.player);
         stage.addChild(otherModel.player);
         stage.addChild(foregroundMap);
         game.rootScene.addChild(stage);
@@ -110,6 +110,14 @@ window.onload = function() {
         pad.y = 220;
         game.rootScene.addChild(pad);
 
+        game.rootScene.addEventListener('enterframe', function(e) {
+            var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
+            var y = Math.min((game.height - 16) / 2 - playerModel.player.y, 0);
+            x = Math.max(game.width,  x + map.width)  - map.width;
+            y = Math.max(game.height, y + map.height) - map.height;
+            stage.x = x;
+            stage.y = y;
+        });
     };
     game.start();
 };
