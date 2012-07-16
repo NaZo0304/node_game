@@ -96,6 +96,7 @@ window.onload = function() {
             }
         });
 
+        playerMap.push(playerModel);
         var stage = new Group();
         stage.addChild(map);
         game.rootScene.addChild(stage);
@@ -116,9 +117,18 @@ window.onload = function() {
             stage.y = y;
         });
         socket.on('player.create', function(msg) {
-
         	console.log('player.created : ');
         	console.log(msg);
+
+        	var player = null;
+        	for (var x=0;x<playerMap.length;x++) {
+        		console.log(playerMap[x]);
+        		if (playerMap[x].id == msg.id) {
+        			player = playerMap[x];
+        		}
+        	}
+
+        	console.log(player);
             socket.on('player/' + msg.id + '.update', function(msg) {
             	console.log('player/' + msg.id + '.update :');
             	console.log(msg);
