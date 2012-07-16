@@ -55,8 +55,8 @@ var PlayerModel = Backbone.Model.extend({
         });
         this.save();
 
-        socket.on('player/' + this.get("id") + '.update', function(msg) {
-        	console.log('player/' + this.get("id") + '.update :');
+        socket.on('player/' + this.id + '.update', function(msg) {
+        	console.log('player/' + this.id + '.update :');
         	console.log(msg);
         });
     },
