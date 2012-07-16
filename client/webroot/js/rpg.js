@@ -129,6 +129,9 @@ window.onload = function() {
         		}
         	}
 
+        	if (!_.isNull(player)){
+        		return;
+        	}
         	console.log(player);
             var player = new PlayerModel(msg);
             player.player.image = image;
@@ -148,12 +151,25 @@ window.onload = function() {
         			player = playerMap[x];
         		}
         	}
-            player.player.x = msg.x;
+        	if (_.isNull(player)){
+        		return;
+        	}
+
+        	player.player.x = msg.x;
             player.player.y = msg.y;
         });
         socket.on('disconnect',    function(msg) {
         	console.log('disconnect : ');
         	console.log(msg);
+
+        	var player = null;
+        	for (var x=0;x<playerMap.length;x++) {
+        		console.log(playerMap[x]);
+        		if (playerMap[x].id == msg.id) {
+        			player = playerMap[x];
+        		}
+        	}
+            stagePl.remove(player.player);
         });
 
 	$('#login').submit(function(){
