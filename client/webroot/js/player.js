@@ -31,6 +31,7 @@ var PlayerModel = Backbone.Model.extend({
 	CHAR_SIZE_X : 32,
 	CHAR_SIZE_Y : 32,
     defaults: {
+    	id : null,
     	name : "名無し",
     	x : 6 * 16 - 8,
     	y : 10 * 16,
@@ -53,6 +54,11 @@ var PlayerModel = Backbone.Model.extend({
             this.text = "";
         });
         this.save();
+
+        socket.on('player/' + this.get("id") + '.update', function(msg) {
+        	console.log('player.update : ');
+        	console.log(msg);
+        });
     },
     validate: function (attrs) {
     },

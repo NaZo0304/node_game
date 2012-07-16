@@ -119,10 +119,6 @@ window.onload = function() {
             playerMap.push(otherModel);
             stagePl.addChild(otherModel.player);
         });
-        socket.on('player.update', function(msg) {
-        	console.log('player.update : ');
-        	console.log(msg);
-        });
         socket.on('disconnect',    function(msg) {
         	console.log('disconnect : ');
         	console.log(msg);
