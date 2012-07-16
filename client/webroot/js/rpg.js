@@ -111,7 +111,7 @@ window.onload = function() {
         socket.on('player.create', function(msg) {
         	console.log('player.created : ');
         	console.log(msg);
-            var otherModel = new PlayerModel();
+            var otherModel = new PlayerModel(msg);
             var image = new Surface(96, 128);
             image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
             otherModel.player.image = image;
