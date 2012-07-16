@@ -98,14 +98,16 @@ window.onload = function() {
         otherModel.player.image = image;
         playerMap.push(otherModel);
 
-        game.rootScene.addEventListener('enterframe', function(e) {
+        var stage = new Group();
+        stage.addChild(map);
+        var stagePl = new Group();
+        stagePl.addChild(playerModel.player);
+        stagePl.addChild(otherModel.player);
+        stage.addChild(stagePl);
+        stage.addChild(foregroundMap);
+        game.rootScene.addChild(stage);
 
-            var stage = new Group();
-            stage.addChild(map);
-            stage.addChild(playerModel.player);
-            stage.addChild(otherModel.player);
-            stage.addChild(foregroundMap);
-            game.rootScene.addChild(stage);
+        game.rootScene.addEventListener('enterframe', function(e) {
 
             var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
             var y = Math.min((game.height - 16) / 2 - playerModel.player.y, 0);
