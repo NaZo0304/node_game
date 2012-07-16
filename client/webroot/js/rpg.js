@@ -130,7 +130,7 @@ window.onload = function() {
         	}
 
         	console.log(player);
-            socket.on('player/' + msg.id + '.update', function(msg) {
+            socket.on('player.update', function(msg) {
             	console.log('player/' + msg.id + '.update :');
             	console.log(msg);
             });
