@@ -46,7 +46,9 @@ window.onload = function() {
         foregroundMap.loadData(mapModel.get('foreground'));
 
         var image = new Surface(96, 128);
-        image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);/*
+        image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
+        var playerModel = null;
+        /*
 
         var playerModel = new PlayerModel({ name: "player" });
         playerModel.player.image = image;
@@ -139,7 +141,7 @@ window.onload = function() {
 	$('#login').submit(function(){
           msg = $("#login-text").val();
           $("#login-text").val("");
-          var playerModel = new PlayerModel({ name: msg });
+          playerModel = new PlayerModel({ name: msg });
           if (msg.length > 0) {
              playerModel.save();
              game.rootScene.removeChild(input);
