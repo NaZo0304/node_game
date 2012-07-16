@@ -116,19 +116,18 @@ window.onload = function() {
         socket.on('player.create', function(msg) {
         	console.log('player.created : ');
         	console.log(msg);
-
             socket.on('player/' + msg.id + '.update', function(msg) {
             	console.log('player/' + msg.id + '.update :');
             	console.log(msg);
             });
-/*            var otherModel = new PlayerModel(msg);
+            var otherModel = new PlayerModel(msg);
             var image = new Surface(96, 128);
             image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
             otherModel.player.image = image;
 
             playerMap.push(otherModel);
             stagePl.addChild(otherModel.player);
-*/        });
+        });
         socket.on('disconnect',    function(msg) {
         	console.log('disconnect : ');
         	console.log(msg);
