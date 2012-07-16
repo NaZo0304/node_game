@@ -46,7 +46,7 @@ window.onload = function() {
         foregroundMap.loadData(mapModel.get('foreground'));
 
         var image = new Surface(96, 128);
-        image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
+        image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);/*
 
         var playerModel = new PlayerModel({ name: "player" });
         playerModel.player.image = image;
@@ -95,7 +95,7 @@ window.onload = function() {
                 }
             }
         });
-
+*/
         var stage = new Group();
         stage.addChild(map);
         game.rootScene.addChild(stage);
@@ -103,7 +103,7 @@ window.onload = function() {
         stagePl.addChild(playerModel.player);
         stage.addChild(stagePl);
         stage.addChild(foregroundMap);
-	game.rootScene.addChild(input);
+        game.rootScene.addChild(input);
 
         game.rootScene.addEventListener('enterframe', function(e) {
             var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
@@ -114,6 +114,7 @@ window.onload = function() {
             stage.y = y;
         });
         socket.on('player.create', function(msg) {
+
         	console.log('player.created : ');
         	console.log(msg);
             socket.on('player/' + msg.id + '.update', function(msg) {
