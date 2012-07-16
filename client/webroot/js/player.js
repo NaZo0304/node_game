@@ -49,15 +49,29 @@ var PlayerModel = Backbone.Model.extend({
 
         this.nameLabel = new CenterLabel();
         this.nameLabel.x = this.player.x / 2 - 50;
-        this.nameLabel.y = this.player.y - 10;http://www.google.co.jp/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0CGIQFjAB&url=http%3A%2F%2Fwww.s-arcana.co.jp%2Ftech%2F2011%2F08%2Fbackbonejs-html-view-model.html&ei=jLEDUM_MBoyZmQWezdzrCQ&usg=AFQjCNGqpufW5zRbi2eQ66Z9eDwjsVtAeQ
+        this.nameLabel.y = this.player.y - 10;
         this.nameLabel.addEventListener(enchant.Event.ENTER_FRAME, function(){
             this.text = "";
         });
         this.save();
-        socket.on('player/' + this.id + '.update', function(msg) {
-        	console.log('player/' + this.id + '.update :');
+        var parent = this;
+        socket.on('player.create', function(msg) {
+        	console.log('player.created : ');
         	console.log(msg);
-        });
+        	console.log(parent.id);
+
+            socket.on('player/' + msg.id + '.update', function(msg) {
+            	console.log('player/' + msg.id + '.update :');
+            	console.log(msg);
+            });
+/*            var otherModel = new PlayerModel(msg);
+            var image = new Surface(96, 128);
+            image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
+            otherModel.player.image = image;
+
+            playerMap.push(otherModel);
+            stagePl.addChild(otherModel.player);
+*/        });
     },
     validate: function (attrs) {
     },
