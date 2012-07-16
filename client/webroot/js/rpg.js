@@ -106,8 +106,10 @@ window.onload = function() {
         game.rootScene.addChild(input);
 
         game.rootScene.addEventListener('enterframe', function(e) {
-            var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
-            var y = Math.min((game.height - 16) / 2 - playerModel.player.y, 0);
+        	if (!_.isNull(playerModel)) {
+        		var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
+        		var y = Math.min((game.height - 16) / 2 - playerModel.player.y, 0);
+        	}
             x = Math.max(game.width,  x + map.width)  - map.width;
             y = Math.max(game.height, y + map.height) - map.height;
             stage.x = x;
