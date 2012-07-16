@@ -56,27 +56,6 @@ var PlayerModel = Backbone.Model.extend({
             this.text = "";
         });
         this.save();
-        var parent = this;
-        socket.on('player.create', function(msg) {
-        	console.log('player.created : ');
-        	console.log(msg);
-        	console.log(parent.id);
-        	parent.id = msg.id;
-        	parent._id = msg._id;
-        	parent.c_id = msg.c_id;
-
-            socket.on('player/' + msg.id + '.update', function(msg) {
-            	console.log('player/' + msg.id + '.update :');
-            	console.log(msg);
-            });
-/*            var otherModel = new PlayerModel(msg);
-            var image = new Surface(96, 128);
-            image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
-            otherModel.player.image = image;
-
-            playerMap.push(otherModel);
-            stagePl.addChild(otherModel.player);
-*/        });
     },
     validate: function (attrs) {
     },
