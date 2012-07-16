@@ -59,6 +59,7 @@ var PlayerModel = Backbone.Model.extend({
         	console.log('player.created : ');
         	console.log(msg);
         	console.log(parent.id);
+        	parent.id = msg.id;
 
             socket.on('player/' + msg.id + '.update', function(msg) {
             	console.log('player/' + msg.id + '.update :');
