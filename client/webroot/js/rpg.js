@@ -99,7 +99,6 @@ window.onload = function() {
         stagePl.addChild(playerModel.player);
         stage.addChild(stagePl);
         stage.addChild(foregroundMap);
-        stage.addChild(output);
 
         game.rootScene.addEventListener('enterframe', function(e) {
             var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
