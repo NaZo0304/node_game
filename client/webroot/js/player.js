@@ -49,16 +49,11 @@ var PlayerModel = Backbone.Model.extend({
 
         this.nameLabel = new CenterLabel();
         this.nameLabel.x = this.player.x / 2 - 50;
-        this.nameLabel.y = this.player.y - 10;
+        this.nameLabel.y = this.player.y - 10;http://www.google.co.jp/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0CGIQFjAB&url=http%3A%2F%2Fwww.s-arcana.co.jp%2Ftech%2F2011%2F08%2Fbackbonejs-html-view-model.html&ei=jLEDUM_MBoyZmQWezdzrCQ&usg=AFQjCNGqpufW5zRbi2eQ66Z9eDwjsVtAeQ
         this.nameLabel.addEventListener(enchant.Event.ENTER_FRAME, function(){
             this.text = "";
         });
         this.save();
-
-        socket.on('player/' + this.get("id") + '.update', function(msg) {
-        	console.log('player/' + this.get("id") + '.update :');
-        	console.log(msg);
-        });
     },
     validate: function (attrs) {
     },
