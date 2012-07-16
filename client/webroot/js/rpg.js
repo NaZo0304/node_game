@@ -69,6 +69,7 @@ window.onload = function() {
                 playerModel.set("x",this.x);
                 playerModel.set("y",this.y);
                 playerModel.save();
+		console.log(playerModel.id);
             } else {
                 this.vx = this.vy = 0;
                 if (game.input.left) {

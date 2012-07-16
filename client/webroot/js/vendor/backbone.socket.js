@@ -43,7 +43,6 @@ Backbone.sync = function(method, model, options){
 	case 'create':
 		socket.once(e, function(data){
 			model.id = data.id;
-			console.log(data);
 		});
 	break;
 
