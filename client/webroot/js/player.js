@@ -55,7 +55,6 @@ var PlayerModel = Backbone.Model.extend({
         this.nameLabel.addEventListener(enchant.Event.ENTER_FRAME, function(){
             this.text = "";
         });
-        this.save();
     },
     validate: function (attrs) {
     },
