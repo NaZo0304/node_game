@@ -99,8 +99,8 @@ window.onload = function() {
         var stage = new Group();
         stage.addChild(map);
         game.rootScene.addChild(stage);
-        var stagePl = new Group();
-        stagePl.addChild(playerModel.player);
+//        var stagePl = new Group();
+//        stagePl.addChild(playerModel.player);
         stage.addChild(stagePl);
         stage.addChild(foregroundMap);
         game.rootScene.addChild(input);
@@ -140,7 +140,7 @@ window.onload = function() {
           var playerModel = new PlayerModel({ name: msg });
           if (msg.length > 0) {
              playerModel.save();
-	     game.rootScene.removeChild(input);
+             game.rootScene.removeChild(input);
           }else{
 	     alert('名前を入れてね');
 	  }
