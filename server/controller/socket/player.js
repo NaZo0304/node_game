@@ -23,10 +23,9 @@ var Player = module.exports = {
 		p.c_id = p._id
 		p.id = p._id
 		console.log(data.clientEvent);
-		socket.broadcast.emit(data.clientEvent, p);
+		socket.emit(data.clientEvent, p);
 	},
 	update: function(io,socket,data){
-		  console.log(data);
                 var config = require('config')
 	        var model =  require(' ../../../' + config.server.modelDir + 'player.js');
 		item = data['item'];
@@ -35,7 +34,7 @@ var Player = module.exports = {
 	 	//current_userを返却＆checkする
 		attr = { x: item.x, y: item.y, HP: item.HP, MP: item.MP, id: data.id, c_id: data.id, _id: data.id }
 
-		socket.broadcast.emit(data.clientEvent, attr);
+		socket.emit(data.clientEvent, attr);
 	},
 	read: function(io, socket, data){
 		 socket.emit(data.clientEvent, data);
