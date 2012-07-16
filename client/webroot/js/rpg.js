@@ -26,6 +26,10 @@ window.onload = function() {
 	              chara : 'images/chara0.gif'
 		};
     var game = new Game(320, 320);
+    	var input = new Label("<form id='login'>" +
+	    	              "<input type='text' id='login-text'>" +
+	    	              "<input type='submit' id='btn-login' value='Loginする'>" +
+			      "</from>");
     game.fps = 15;
     game.preload(images['map'], images['chara']);
     game.onload = function() {
@@ -99,6 +103,7 @@ window.onload = function() {
         stagePl.addChild(playerModel.player);
         stage.addChild(stagePl);
         stage.addChild(foregroundMap);
+	game.rootScene.addChild(input);
 
         game.rootScene.addEventListener('enterframe', function(e) {
             var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
@@ -128,6 +133,19 @@ window.onload = function() {
         	console.log('disconnect : ');
         	console.log(msg);
         });
+
+	$('#login').submit(function(){
+          msg = $("#login-text").val();
+          $("#login-text").val("");
+          var playerModel = new PlayerModel({ name: msg });
+          if (msg.length > 0) {
+             playerModel.save();
+	     game.rootScene.removeChild(input);
+          }else{
+	     alert('名前を入れてね');
+	  }
+	  return false;
+	});
     };
     game.start();
 };
