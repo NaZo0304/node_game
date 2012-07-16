@@ -1,6 +1,6 @@
 /**
  * Player controller
- * 
+ *
  * @package node_game
  * @subpackage contollers.socket
  * @author ohta-rh
@@ -13,7 +13,7 @@ var Player = module.exports = {
 		},
 	//移動
 	create: function(io, socket, data) {
-		var klass = Player.model();  
+		var klass = Player.model();
 		var p = new klass();
 		p.x = data['item'].x;
 		p.y = data['item'].y;
