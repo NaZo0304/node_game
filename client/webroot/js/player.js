@@ -32,6 +32,8 @@ var PlayerModel = Backbone.Model.extend({
 	CHAR_SIZE_Y : 32,
     defaults: {
     	id : null,
+    	_id : null,
+    	c_id : null,
     	name : "名無し",
     	x : 6 * 16 - 8,
     	y : 10 * 16,
@@ -60,6 +62,8 @@ var PlayerModel = Backbone.Model.extend({
         	console.log(msg);
         	console.log(parent.id);
         	parent.id = msg.id;
+        	parent._id = msg._id;
+        	parent.c_id = msg.c_id;
 
             socket.on('player/' + msg.id + '.update', function(msg) {
             	console.log('player/' + msg.id + '.update :');
