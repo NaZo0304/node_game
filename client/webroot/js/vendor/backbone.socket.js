@@ -1,6 +1,6 @@
 /**
  * Backbone using websocket.
- * 
+ *
  * @package node_game
  * @author harapeco
  * @respect http://developer.teradata.com/blog/jasonstrimpel/2011/11/backbone-js-and-socket-io
@@ -36,12 +36,13 @@ Backbone.sync = function(method, model, options){
 	var data = {
 		clientEvent: e,
 		item: model.attributes,
-		id: model.id  
+		id: model.id
 	};
 	socket.emit(emitEvent(model, method), data);
 	switch(method){
 	case 'create':
 		socket.once(e, function(data){
+			console.log(data.id);
 			model.id = data.id;
 		});
 	break;
