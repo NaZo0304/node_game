@@ -28,8 +28,26 @@ var SocketRouter = module.exports = {
 		}
 	},
 	load: function(controller, method, dir){
-		var filepath = dir+'/'+controller;
+		var filepath = dir + '/' + controller;
 		return method ? require(filepath)[method] : require(filepath);
+	},
+	connect: function(io, socket){
+		socket.emit('backbone.socket.connected');
+		socket.on('init', function(req){
+			socket.set('room', req.room);
+			socket.set('name', req.name);
+			io.sockets.in(req.room).emit('backbone.socket.message', req.name + ' has joined!');
+			socket.join(req.room);
+		});
+	},
+	disconnect: function(io, socket){
+		socket.on('disconnect', function(){
+			var room, name;
+			socket.get('room', function(err, _room){room = _room;});
+			socket.get('name', function(err, _name){name = _name;});
+			io.sockets.in(room).emit('backbone.socket.message', name + ' has leaved!');
+			socket.leave(room);
+		});
 	},
 	listen: function(app, map, dir, sessionStore){
 		var io=require('socket.io').listen(app);
@@ -58,11 +76,10 @@ var SocketRouter = module.exports = {
 			});
 		});
 		io.sockets.on('connection', function(socket){
+			SocketRouter.connect(io, socket);
+//			console.log('socket is ', socket.handshake.sessionId);
 			SocketRouter.map(map, io, socket, dir);
-			//TODO: disconnect
-                        socket.on("disconnect", function () {
-                           io.sockets.emit("hoge", {});
-                         });
+			SocketRouter.disconnect(io, socket);
 		});
 	}
 };
