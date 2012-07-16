@@ -22,8 +22,7 @@ var Player = module.exports = {
 		p.save();
 		p.c_id = p._id
 		p.id = p._id
-		console.log(data.clientEvent);
-		socket.emit(data.clientEvent, p);
+		socket.broadcast.emit(data.clientEvent, p);
 	},
 	update: function(io,socket,data){
                 var config = require('config')
@@ -34,7 +33,7 @@ var Player = module.exports = {
 	 	//current_userを返却＆checkする
 		attr = { x: item.x, y: item.y, HP: item.HP, MP: item.MP, id: data.id, c_id: data.id, _id: data.id }
 
-		socket.emit(data.clientEvent, attr);
+		socket.bloadcast.emit(data.clientEvent, attr);
 	},
 	read: function(io, socket, data){
 		 socket.emit(data.clientEvent, data);
