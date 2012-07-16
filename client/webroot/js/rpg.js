@@ -91,16 +91,6 @@ window.onload = function() {
                 }
             }
         });
-    	var input = new Label("<form name='hoge'>" +
-    			      "<input type='text' name='text'>" +
-    			      "</from>");
-    	game.rootScene.addChild(input);
-    	var output = new Label('');
-    	output.y = 64;
-    	game.rootScene.addChild(output);
-    	output.onenterframe = function(e) {
-    	    output.text = document.hoge.text.value;
-    	};
 
         var stage = new Group();
         stage.addChild(map);
