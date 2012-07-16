@@ -48,6 +48,8 @@ window.onload = function() {
         var image = new Surface(96, 128);
         image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
 
+        var playerModel = null;
+
         var stage = new Group();
         stage.addChild(map);
         game.rootScene.addChild(stage);
