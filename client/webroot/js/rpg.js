@@ -99,6 +99,7 @@ window.onload = function() {
         stage.addChild(map);
         game.rootScene.addChild(stage);
         var stagePl = new Group();
+        stagePl.addChild( playerModel.player);
         stage.addChild(stagePl);
         stage.addChild(foregroundMap);
         game.rootScene.addChild(input);
