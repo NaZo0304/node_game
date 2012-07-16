@@ -19,16 +19,6 @@ var CenterLabel = Class.create(Label, {
     }
 });
 
-socket.on('player.create', function(msg) {
-	console.log('player.created : ' + msg);
-});
-socket.on('player.update', function(msg) {
-	console.log('player.update : ' + msg);
-});
-socket.on('disconnect',    function(msg) {
-	console.log('disconnect : ' + msg);
-});
-
 window.onload = function() {
 	var playerMap = [];
 	var images = {
@@ -50,8 +40,6 @@ window.onload = function() {
         var foregroundMap = new Map(16, 16);
         foregroundMap.image = game.assets[images['map']];
         foregroundMap.loadData(mapModel.get('foreground'));
-
-
 
         var image = new Surface(96, 128);
         image.draw(game.assets[images['chara']], 0, 0, 96, 128, 0, 0, 96, 128);
