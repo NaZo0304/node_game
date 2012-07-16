@@ -91,12 +91,16 @@ window.onload = function() {
                 }
             }
         });
-
-        var otherModel = new PlayerModel();
-        var image = new Surface(96, 128);
-        image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
-        otherModel.player.image = image;
-        playerMap.push(otherModel);
+    	var input = new Label("<form name='hoge'>" +
+    			      "<input type='text' name='text'>" +
+    			      "</from>");
+    	game.rootScene.addChild(input);
+    	var output = new Label('');
+    	output.y = 64;
+    	game.rootScene.addChild(output);
+    	output.onenterframe = function(e) {
+    	    output.text = document.hoge.text.value;
+    	};
 
         var stage = new Group();
         stage.addChild(map);
@@ -105,16 +109,34 @@ window.onload = function() {
         stagePl.addChild(playerModel.player);
         stage.addChild(stagePl);
         stage.addChild(foregroundMap);
+        stage.addChild(output);
 
         game.rootScene.addEventListener('enterframe', function(e) {
-            stagePl.addChild(otherModel.player);
-
             var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
             var y = Math.min((game.height - 16) / 2 - playerModel.player.y, 0);
             x = Math.max(game.width,  x + map.width)  - map.width;
             y = Math.max(game.height, y + map.height) - map.height;
             stage.x = x;
             stage.y = y;
+        });
+        socket.on('player.create', function(msg) {
+        	console.log('player.created : ');
+        	console.log(msg);
+            var otherModel = new PlayerModel();
+            var image = new Surface(96, 128);
+            image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
+            otherModel.player.image = image;
+
+            playerMap.push(otherModel);
+            stagePl.addChild(otherModel.player);
+        });
+        socket.on('player.update', function(msg) {
+        	console.log('player.update : ');
+        	console.log(msg);
+        });
+        socket.on('disconnect',    function(msg) {
+        	console.log('disconnect : ');
+        	console.log(msg);
         });
     };
     game.start();
