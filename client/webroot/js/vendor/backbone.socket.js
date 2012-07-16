@@ -42,6 +42,10 @@ Backbone.sync = function(method, model, options){
 	switch(method){
 	case 'create':
 		console.log("created method");
+<<<<<<< HEAD
+=======
+		console.log(e);
+>>>>>>> 39f0521270ad2c7014b3b3f1b8d63397ea84186a
 		socket.once(e, function(data){
 			console.log(data.id);
 			model.id = data.id;
