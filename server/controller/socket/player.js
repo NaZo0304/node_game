@@ -33,7 +33,7 @@ var Player = module.exports = {
 	 	//current_userを返却＆checkする
 		attr = { x: item.x, y: item.y, HP: item.HP, MP: item.MP, id: data.id, c_id: data.id, _id: data.id }
 
-		socket.emit(data.clientEvent, attr);
+		socket.emit('player.update', attr);
 	},
 	read: function(io, socket, data){
 		 socket.emit(data.clientEvent, data);
