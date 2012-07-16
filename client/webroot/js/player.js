@@ -52,7 +52,7 @@ var PlayerModel = Backbone.Model.extend({
         this.nameLabel.addEventListener(enchant.Event.ENTER_FRAME, function(){
             this.text = "";
         });
-        playerModel.save();
+        this.playerModel.save();
     },
     validate: function (attrs) {
     },
