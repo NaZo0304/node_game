@@ -101,6 +101,7 @@ window.onload = function() {
         var stage = new Group();
         stage.addChild(map);
         game.rootScene.addChild(stage);
+        stage.addChild(foregroundMap);
 
         game.rootScene.addEventListener('enterframe', function(e) {
 
@@ -108,7 +109,6 @@ window.onload = function() {
             stagePl.addChild(playerModel.player);
             stagePl.addChild(otherModel.player);
             stage.addChild(stagePl);
-            stage.addChild(foregroundMap);
 
             var x = Math.min((game.width  - 16) / 2 - playerModel.player.x, 0);
             var y = Math.min((game.height - 16) / 2 - playerModel.player.y, 0);
