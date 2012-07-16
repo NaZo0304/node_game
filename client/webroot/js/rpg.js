@@ -95,6 +95,7 @@ window.onload = function() {
             }
         });
 
+        playerMap.push(playerModel);
         var stage = new Group();
         stage.addChild(map);
         game.rootScene.addChild(stage);
@@ -115,9 +116,11 @@ window.onload = function() {
             stage.y = y;
         });
         socket.on('player.create', function(msg) {
-
         	console.log('player.created : ');
         	console.log(msg);
+        	_.each(playerMap, function(num) {
+        		console.log(playerMap[num]);
+        	});
             socket.on('player/' + msg.id + '.update', function(msg) {
             	console.log('player/' + msg.id + '.update :');
             	console.log(msg);
