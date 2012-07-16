@@ -118,6 +118,7 @@ window.onload = function() {
         socket.on('player.create', function(msg) {
         	console.log('player.created : ');
         	console.log(msg);
+        	console.log(playerMap);
         	_.each(playerMap, function(num) {
         		console.log(playerMap[num]);
         	});
