@@ -15,6 +15,7 @@ var Player = module.exports = {
 	create: function(io, socket, data) {
 		var klass = Player.model();
 		var p = new klass();
+		p.sid = io.handshaken[socket.id].sessionId;
 		p.x = data['item'].x;
 		p.y = data['item'].y;
 		p.HP = data['item'].HP;
