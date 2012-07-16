@@ -1,1 +1,20 @@
-<h> Session </h1>
+<script src="js/player.js"></script>
+<h1>名前を入れてログインしてね</h1>
+<form id="login">
+<lable>Name:<input type="text" class="text-login" id="text-box"></label>
+<input type="button" id="login-btn" value="login!"/>
+</form>
+<script>
+(function(window){
+   $('#login-btn').click(function(){
+       msg = $("#text-box").val();
+       $("#text-box").val("");
+       var playerModel = new PlayerModel({ name: "ohta" });
+       if (msg.length > 0) {
+         playerModel.save();
+       }
+       //RPGへ遷移
+       return false;
+     });
+})(window);
+</script>
