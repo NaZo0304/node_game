@@ -119,9 +119,9 @@ window.onload = function() {
         	console.log('player.created : ');
         	console.log(msg);
         	console.log(playerMap);
-        	_.each(playerMap, function(num) {
-        		console.log(playerMap[num]);
-        	});
+        	for (var x=0;x<playerMap.length;x++) {
+        		console.log(playerMap[x]);
+        	}
             socket.on('player/' + msg.id + '.update', function(msg) {
             	console.log('player/' + msg.id + '.update :');
             	console.log(msg);
