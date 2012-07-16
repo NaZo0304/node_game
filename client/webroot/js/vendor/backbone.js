@@ -393,6 +393,7 @@
       // Finish configuring and sending the Ajax request.
       options.error = Backbone.wrapError(options.error, model, options);
       var method = this.isNew() ? 'create' : 'update';
+      console.log(method);
       var xhr = (this.sync || Backbone.sync).call(this, method, this, options);
       if (options.wait) this.set(current, silentOptions);
       return xhr;
