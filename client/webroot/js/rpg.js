@@ -101,9 +101,8 @@ window.onload = function() {
         var stage = new Group();
         stage.addChild(map);
         game.rootScene.addChild(stage);
-//        var stagePl = new Group();
-//        stagePl.addChild(playerModel.player);
-//        stage.addChild(stagePl);
+        var stagePl = new Group();
+        stage.addChild(stagePl);
         stage.addChild(foregroundMap);
         game.rootScene.addChild(input);
 
@@ -125,13 +124,6 @@ window.onload = function() {
             	console.log('player/' + msg.id + '.update :');
             	console.log(msg);
             });
-            var otherModel = new PlayerModel(msg);
-            var image = new Surface(96, 128);
-            image.draw(game.assets[images['chara']], 97, 0, 96, 128, 0, 0, 96, 128);
-            otherModel.player.image = image;
-
-            playerMap.push(otherModel);
-            stagePl.addChild(otherModel.player);
         });
         socket.on('disconnect',    function(msg) {
         	console.log('disconnect : ');
@@ -188,6 +180,7 @@ window.onload = function() {
                   }
               }
           });
+          stagePl.addChild(otherModel.player);
           if (msg.length > 0) {
              playerModel.save();
              game.rootScene.removeChild(input);
